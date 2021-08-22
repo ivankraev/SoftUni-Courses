@@ -1,0 +1,55 @@
+function solve(input) {
+    let str = input.shift();
+    let commands = {
+        'Replace': (curChar, newChar) => {
+            str = str.split(curChar).join(newChar);
+            console.log(str);
+        },
+        'Cut': (startIndex, endIndex) => {
+            startIndex=Number(startIndex);
+            endIndex= Number(endIndex);
+            if (startIndex >= 0 && endIndex < str.length) {
+                str = str.substring(0, startIndex) + str.substring(endIndex+1);
+                console.log(str);
+            }
+            else {
+                console.log('Invalid indices!');
+            }
+
+        },
+        'Make': (state) => {
+            str = state == 'Upper' ? str.toLocaleUpperCase() : str.toLocaleLowerCase();
+            console.log(str);
+        },
+        'Check': (string) => {
+            if (str.includes(string)) {
+                console.log(`Message contains ${string}`);
+            }
+            else {
+                console.log(`Message doesn't contain ${string}`);
+            }
+        },
+        'Sum': (startIndex, endIndex) => {
+            startIndex = Number(startIndex);
+            endIndex = Number(endIndex);
+            let total = 0;
+            if (startIndex >= 0 && endIndex < str.length) {
+                
+                let strArr = str.substring(startIndex, endIndex + 1).split('');
+                strArr.forEach(el => {
+                    let points = el.charCodeAt();
+                    total += points;
+                });
+                console.log(total);
+            }
+            else {
+                console.log('Invalid indices!');
+            }
+
+        },
+    }
+    while (input[0] != 'Finish') {
+        let [comm, ...args] = input.shift().split(' ');
+        commands[comm](...args);
+    }
+}

@@ -1,0 +1,25 @@
+function travel(input) {
+    let startNumber = Number(input[0]);
+    let endNumber = Number(input[1]);
+    let magicNumber = Number(input[2]);
+    let isTrue = false;
+    let combinationCounter = 0;
+    let counterr=0;
+    for (let i = startNumber; i <= endNumber; i++) {
+        for (let j = startNumber; j <= endNumber; j++) {
+            counterr++;
+            if ((i + j) === magicNumber) {
+                isTrue = true;
+                console.log(`Combination N:${counterr} (${i} + ${j} = ${i + j})`);
+break;
+            }
+            combinationCounter++;
+        }
+        if(isTrue){
+            break;
+        }
+    }
+    if (!isTrue) {
+        console.log(`${combinationCounter} combinations - neither equals ${magicNumber}`);
+    }
+}

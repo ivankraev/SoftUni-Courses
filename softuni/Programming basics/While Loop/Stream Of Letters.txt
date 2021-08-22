@@ -1,0 +1,41 @@
+function charity(input) {
+    let index = 0;
+    let command = String(input[index]);
+    index++;
+    let isO = false;
+    let isN = false;
+    let isC = false;
+    let word = '';
+    let singleWord = '';
+    while (command !== 'End') {
+        let bukva = command;
+        if (bukva >= 'A' && bukva <= 'Z' || bukva >= 'a' && bukva <= 'z') {
+            if (bukva === 'o' && !isO) {
+                isO = true;
+            }
+            else if (bukva === 'n' && !isN) {
+                isN = true;
+            }
+            else if (bukva === 'c' && !isC) {
+                isC = true;
+            }
+            else {
+                word += bukva;
+            }
+            if (isC && isO && isN) {
+                singleWord +=word + ' ';
+                isO = false;
+                isN = false;
+                isC = false;
+                word ='';
+            }
+            command = input[index];
+            index++;
+        }
+        else {
+            command = input[index];
+            index++;
+        }
+    }
+    console.log(singleWord);
+}

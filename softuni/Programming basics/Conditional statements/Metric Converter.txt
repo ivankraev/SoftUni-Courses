@@ -1,0 +1,26 @@
+function solve(input){
+    let number = Number(input[0]);
+    let inputNumber = input[1];
+    let outputNumber = input[2];
+    let result = Number();
+    
+    if (inputNumber == 'mm' && outputNumber == 'm'){
+    result = number / 1000;
+    }
+    else if(inputNumber == 'm' && outputNumber == 'mm'){
+    result = number * 1000;
+    }
+    else if (inputNumber == 'mm' && outputNumber === 'cm'){
+    result = number / 10;
+    }
+    else if (inputNumber == 'm' && outputNumber == 'cm'){
+    result = number * 100;
+    }
+    else if(inputNumber == 'cm' && outputNumber == 'mm'){
+    result = number * 10;
+    }
+    else{
+    result = number / 100;
+    }
+    console.log(result.toFixed(3));
+    }

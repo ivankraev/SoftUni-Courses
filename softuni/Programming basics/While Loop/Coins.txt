@@ -1,0 +1,40 @@
+ function solve(input){
+let amount = Number(input[0]);
+let change = 0;
+amount = Math.floor(100 * amount);
+while(amount>0){
+if (amount >= 200){
+    amount -=200;
+    change++;
+}
+else if (amount >=100){
+amount-=100;
+change++;
+}
+else if(amount >= 50){
+amount-=50;
+change++;
+}
+else if(amount>=20){
+    amount-=20;
+    change++
+}
+else if(amount>=10){
+    amount-=10;
+    change++;
+}
+else if(amount>=5){
+    amount-=5;
+    change++;
+}
+else if(amount>=2){
+    amount-=2;
+    change++;
+}
+else if(amount>=1){
+    amount-=1;
+    change++;
+}
+}
+console.log(change);
+}

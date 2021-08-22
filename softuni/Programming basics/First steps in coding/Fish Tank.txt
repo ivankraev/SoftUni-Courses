@@ -1,0 +1,14 @@
+function demo(input){
+let lengthSm = Number(input[0]);
+let widthSm = Number(input[1]);
+let heightSm = Number(input[2]);
+let percent = Number(input[3]);
+
+let volume =  lengthSm*widthSm*heightSm;
+totalCapacity = volume *0.001;
+percentCapacity = percent*0.01
+waterRequired = totalCapacity * (1-percentCapacity)
+
+
+console.log(waterRequired);
+}

@@ -1,0 +1,26 @@
+ function solve(input){
+let width = Number(input[0]);
+let length = Number(input[1]);
+let index=2;
+let cake= width*length;
+let command = input[index];
+index++
+let sum = 0;
+while(command !=='STOP'){
+let pieces = Number(command);
+sum+=pieces;
+
+if(sum>cake){
+console.log(`No more cake left! You need ${sum-cake} pieces more.`);
+break;
+}
+command = input[index];
+index++
+}
+if (command === 'STOP'){
+    if(cake>=sum){
+    console.log(`${cake-sum} pieces are left.`);
+    }
+    
+    }
+}

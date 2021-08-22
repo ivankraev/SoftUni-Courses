@@ -1,0 +1,18 @@
+function solve(input) {
+    input.shift();
+    let regex = /(U\$)(?<username>[A-Z][a-z]{2,})\1P@\$(?<pass>[A-Za-z]{5,}\d+)P@\$/;
+    let count = 0;
+
+    for (let pass of input) {
+        let match = regex.exec(pass);
+        if (match != null) {
+            count++;
+            console.log('Registration was successful');
+            console.log(`Username: ${match.groups.username}, Password: ${match.groups.pass}`);
+        }
+        else {
+            console.log('Invalid username or password');
+        }
+    }
+    console.log(`Successful registrations: ${count}`);
+}
