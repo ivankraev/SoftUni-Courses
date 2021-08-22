@@ -1,0 +1,17 @@
+function muOnline(arr) {
+    let studentsCount = Number(arr.shift());
+    let lecturesCount = Number(arr.shift());
+    let additionalBonus = Number(arr.shift());
+    let maxBonus = 0;
+    let maxAttendances = 0;
+    for (let attendances of arr) {
+        attendances = Number(attendances);
+        let totalBonus = (attendances / lecturesCount) * (5 + additionalBonus);
+        if (totalBonus > maxBonus) {
+            maxBonus = totalBonus;
+            maxAttendances = attendances;
+        }
+    }
+    console.log(`Max Bonus: ${Math.ceil(maxBonus)}.`);
+    console.log(`The student has attended ${maxAttendances} lectures.`);
+}

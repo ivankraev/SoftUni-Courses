@@ -1,0 +1,23 @@
+function backToThePast(input) {
+    let money = input[0];
+    let year = input[1];
+    let moneySpend = 0;
+    let age = 18;
+    for (let i = 1800; i <= year; i++) {
+        if (i % 2 === 0) {
+            moneySpend += 12000;
+        }
+        else {
+            moneySpend += 12000 + 50 * age
+        }
+        age++
+    }
+    if (moneySpend > money) {
+        let nz = (moneySpend - money).toFixed(2)
+        console.log(`He will need ${nz} dollars to survive.`);
+    }
+    else {
+        let nz = (money - moneySpend).toFixed(2)
+        console.log(`Yes! He will live a carefree life and will have ${nz} dollars left.`);
+    }
+}
