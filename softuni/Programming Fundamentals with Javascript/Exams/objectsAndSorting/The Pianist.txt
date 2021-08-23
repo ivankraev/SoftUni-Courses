@@ -1,0 +1,60 @@
+function solve(input) {
+    let n = input.shift();
+    let composes = {};
+    for (let i = 0; i < n; i++) {
+        let [piece, composer, key] = input[i].split('|');
+        composes[piece] = {
+            composer,
+            key,
+        }
+    }
+    for (let i = n; i < input.length; i++) {
+        let [comm, ...args] = input[i].split('|');
+        if (comm == 'Stop') {
+            break;
+        }
+        add(composes, comm, ...args);
+        remove(composes, comm, ...args);
+        changeKey(composes, comm, ...args);
+    }
+    function add(composes, comm, piece, composer, key) {
+        if (comm == 'Add') {
+            if (composes.hasOwnProperty(piece)) {
+                console.log(`${piece} is already in the collection!`);
+            }
+            else {
+                composes[piece] = { composer, key }
+                console.log(`${piece} by ${composer} in ${key} added to the collection!`);
+            }
+        }
+    }
+    function remove(composes, comm, piece) {
+        if (comm == 'Remove') {
+            if (composes.hasOwnProperty(piece)) {
+                delete composes[piece];
+                console.log(`Successfully removed ${piece}!`);
+            }
+            else {
+                console.log(`Invalid operation! ${piece} does not exist in the collection.`);
+            }
+
+        }
+    }
+    function changeKey(composes, comm, piece, newKey) {
+        if (comm == 'ChangeKey') {
+            if (composes.hasOwnProperty(piece)) {
+                composes[piece].key = newKey;
+                console.log(`Changed the key of ${piece} to ${newKey}!`);
+            }
+            else {
+                console.log(`Invalid operation! ${piece} does not exist in the collection.`);
+            }
+        }
+    }
+    function sortedComposes(a, b) {
+        let [aPieceName, aInfo] = a;
+        let [bPieceName, bInfor] = b;
+return aPieceName.localeCompare(bPieceName) || aInfo.composer.localeCompare(bInfor.composer);
+    }
+    Object.entries(composes).sort(sortedComposes).forEach(x => console.log(`${x[0]} -> Composer: ${x[1].composer}, Key: ${x[1].key}`));
+}

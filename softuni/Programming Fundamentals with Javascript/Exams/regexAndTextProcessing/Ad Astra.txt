@@ -1,0 +1,18 @@
+function solve(input) {
+    input = input[0]
+    let regex = /(#|\|)(?<product>[\sA-Za-z]+)\1(?<expDate>\d{2}\/\d{2}\/\d{2})\1(?<calories>\d+)\1/gm;
+    let match = regex.exec(input);
+    let result = [];
+    totalCalories = 0;
+    while (match != null) {
+        let name = match.groups.product;
+        let date = match.groups.expDate;
+        let calories = Number(match.groups.calories);
+        totalCalories+=calories
+        result.push(`Item: ${name}, Best before: ${date}, Nutrition: ${calories}`)
+        match = regex.exec(input);
+    }
+    let survivalDays = Number((totalCalories / 2000));
+    console.log(`You have food to last you for: ${Math.floor(survivalDays)} days!`);
+    console.log(result.join('\n'));
+}
