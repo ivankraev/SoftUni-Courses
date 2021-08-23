@@ -1,0 +1,63 @@
+function solve(input) {
+    let n = input.shift();
+    n = Number(n);
+    let plantsCatalog = {};
+    for (let i = 0; i < n; i++) {
+        let [plant, rarity] = input[i].split('<->');
+        rarity = Number(rarity);
+        if (!plantsCatalog.hasOwnProperty(plant)) {
+            plantsCatalog[plant] = {
+                rarity,
+                ratings: [],
+            }
+        }
+        else {
+            plantsCatalog[plant].rarity = rarity
+        }
+
+    }
+    let commands = {
+        'Rate:': (plant, rating) => {
+            if (plantsCatalog[plant] != undefined) {
+                rating = Number(rating)
+                plantsCatalog[plant].ratings.push(rating)
+            }
+            else {
+                console.log(`error`);
+            }
+        },
+        'Update:': (plant, newRarity) => {
+            if (plantsCatalog[plant] != undefined) {
+                plantsCatalog[plant].rarity = Number(newRarity);
+            }
+            else {
+                console.log(`error`);
+            }
+        },
+        'Reset:': (plant) => {
+            if (plantsCatalog[plant] != undefined) {
+                plantsCatalog[plant].ratings = [0];
+            }
+            else {
+                console.log(`error`);
+            }
+        },
+    }
+    for (let i = n; i < input.length - 1; i++) {
+        input[i] = input[i].split(' ');
+        if (input[i].indexOf('-') != -1) {
+            input[i].splice(input[i].indexOf('-'), 1);
+        }
+        let [comm, ...args] = input[i];
+        commands[comm](...args);
+    }
+    Object.keys(plantsCatalog).forEach(el => {
+        plantsCatalog[el].avgRate = plantsCatalog[el].ratings.reduce((a, b) => a + Number(b), 0) / plantsCatalog[el].ratings.length || 0;
+    })
+    console.log('Plants for the exhibition:');
+    let sorted = Object.keys(plantsCatalog)
+        .sort((a, b) => plantsCatalog[b].rarity - plantsCatalog[a].rarity || plantsCatalog[b].avgRate - plantsCatalog[a].avgRate)
+        .forEach(el => {
+            console.log(`- ${el}; Rarity: ${plantsCatalog[el].rarity}; Rating: ${plantsCatalog[el].avgRate.toFixed(2)}`);
+        });
+}

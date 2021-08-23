@@ -1,0 +1,48 @@
+function solve(input) {
+    let n = input.shift();
+    let cars = {};
+    let commands = {
+        'Drive': (car, distance, fuelRequired) => {
+            distance = Number(distance)
+            if (cars[car].fuel > fuelRequired) {
+                cars[car].fuel -= fuelRequired;
+                cars[car].mileage += distance;
+                console.log(`${car} driven for ${distance} kilometers. ${fuelRequired} liters of fuel consumed.`);
+            }
+            else { console.log(`Not enough fuel to make that ride`); }
+            if (cars[car].mileage >= 100000) {
+                delete cars[car];
+                console.log(`Time to sell the ${car}!`);
+            }
+        },
+        'Refuel': (car, fuel) => {
+            fuel = Number(fuel)
+            let oldValue = cars[car].fuel;
+            cars[car].fuel += fuel;
+            cars[car].fuel = cars[car].fuel > 75 ? 75 : cars[car].fuel;
+            console.log(`${car} refueled with ${cars[car].fuel - oldValue} liters`);
+        },
+        'Revert': (car, kilomteres) => {
+            cars[car].mileage -= kilomteres;
+            if (cars[car].mileage < 10000) {
+                cars[car].mileage = 10000;
+            }
+            else { console.log(`${car} mileage decreased by ${kilomteres} kilometers`); }
+        },
+    }
+    for (let i = 0; i < n; i++) {
+        let [car, mileage, fuel] = input.shift().split('|');
+        mileage = Number(mileage);
+        fuel = Number(fuel);
+        cars[car] = { mileage, fuel, };
+    }
+    while (input[0] != 'Stop') {
+        let [comm, ...args] = input.shift().split(' : ')
+        commands[comm](...args);
+    }
+    let sorted = Object.keys(cars)
+        .sort((a, b) => cars[b].mileage - cars[a].mileage || a.localeCompare(b))
+        .forEach(el => {
+            console.log(`${el} -> Mileage: ${cars[el].mileage} kms, Fuel in the tank: ${cars[el].fuel} lt.`);
+        })
+}
