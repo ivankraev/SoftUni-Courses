@@ -1,8 +1,0 @@
-function solve(input) {
-    let locations = input.match(/((\=)|(\/))[A-Z][A-Za-z]{2,}\1/gm) != null ? input.match(/((\=)|(\/))[A-Z][A-Za-z]{2,}\1/gm) : [];
-    locations = locations != [] ? locations.map(el => {
-        el = el.slice(1, -1);
-        return el;
-    }) : [];
-    console.log(`Destinations: ${locations.join(', ')}\nTravel Points: ${locations.join('').length}`);
-}
