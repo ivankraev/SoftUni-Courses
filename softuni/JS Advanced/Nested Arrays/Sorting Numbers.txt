@@ -1,0 +1,16 @@
+function solve(arr) {
+    arr.sort((a, b) => a - b);
+    let end = arr.length - 1;
+    let result = arr.reduce((acc, el) => {
+        if (acc.length !== arr.length) {
+            acc.push(el);
+            if (acc.length !== arr.length) {
+                acc.push(arr[end--])
+            }
+        }
+        return acc;
+    }, []);
+    
+    return result
+
+}
