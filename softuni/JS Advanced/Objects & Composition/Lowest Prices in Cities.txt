@@ -1,0 +1,19 @@
+function solve(arr) {
+    let data = {};
+    let result = [];
+    while (arr.length) {
+        let el = arr.shift();
+        let [town, product, price] = el.split(' | ');
+        price = Number(price);
+        if (data[product] == undefined) {
+            data[product] = { town, price }
+        }
+        else {
+            data[product] = data[product].price <= price ? data[product] : { town, price };
+        }
+    }
+    for (const key in data) {
+        result.push(`${key} -> ${data[key].price} (${data[key].town})`)
+    }
+    return result.join('\n')
+}
