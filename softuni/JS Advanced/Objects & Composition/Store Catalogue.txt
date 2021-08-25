@@ -1,0 +1,19 @@
+function solve(arr) {
+    let isPrinted = false;
+    let firstLetter;
+    arr.sort((a, b) => a.localeCompare(b));
+    arr.forEach(element => {
+        let [name, price] = element.split(' : ');
+        price = Number(price);
+        if (firstLetter !== name[0]) {
+            isPrinted = false;
+        }
+        firstLetter = name[0];
+        if (isPrinted == false) {
+            console.log(firstLetter);
+            isPrinted = true;
+        }
+        console.log(`${name}: ${price}`);
+    });
+
+}
