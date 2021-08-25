@@ -1,0 +1,16 @@
+function solve(arr) {
+    arr.shift();
+    let result = []
+    arr.reduce((acc, curr) => {
+        curr = curr.split(/\s*\|\s*/gim).filter((x) => x !== '');
+        let [name, latitude, logitude] = curr;
+        acc.Town = name;
+        acc.Latitude = Number(Number(latitude).toFixed(2));
+        acc.Longitude = Number(Number(logitude).toFixed(2));
+        let obj = JSON.parse(JSON.stringify(acc));
+        result.push(obj);
+        return {};
+    }, {})
+
+    console.log(JSON.stringify(result));
+}
