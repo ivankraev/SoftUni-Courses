@@ -1,0 +1,21 @@
+function solve() {
+   document.querySelector('#searchBtn').addEventListener('click', onClick);
+
+   function onClick() {
+      let search = document.getElementById('searchField');
+      let elements = Array.from(document.querySelectorAll('tbody tr'));
+      let searchText = search.value;
+      elements.forEach(e => {
+         e.className = ''
+      });
+      let filteredRows = elements.filter(el => {
+         let values = Array.from(el.children);
+         if (values.some(x => x.textContent.includes(searchText))) {
+            el.className = 'select'
+
+         }
+      });
+
+      search.value = '';
+   }
+}
