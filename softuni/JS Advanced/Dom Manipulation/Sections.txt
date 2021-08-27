@@ -14,6 +14,4 @@ function create(words) {
          e.target.children[0].style.display = 'block'
       }
    }
-
-
 }
