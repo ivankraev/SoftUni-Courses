@@ -1,0 +1,45 @@
+function solve() {
+   document.querySelector('#btnSend').addEventListener('click', onClick);
+
+   function onClick() {
+      let textAreaElement = document.querySelector('#inputs textarea')
+      let text = textAreaElement.value;
+      let inputArr = JSON.parse(text);
+      let restaurants = {};
+      for (let index = 0; index < inputArr.length; index++) {
+         let [restaurantName, workersString] = inputArr[index].split(' - ');
+         let inputWorkers = workersString.split(', ').map(x => {
+            let [name, salary] = x.split(' ');
+            return { name, salary: Number(salary) }
+         });
+         if (!restaurants[restaurantName]) {
+            restaurants[restaurantName] = {
+               restaurantName,
+               workers: [],
+               getAverageSalary(w) {
+                  return w.reduce((acc, el) => acc + el, 0) / w.length;
+               }
+            }
+         }
+         restaurants[restaurantName].workers = restaurants[restaurantName].workers.concat(inputWorkers)
+      }
+      let sortedRestaurants = Object.values(restaurants)
+         .sort((a, b) => {
+            let bAvgSalary = b.workers.reduce((a, b) => a + b.salary) / b.workers.length;
+            let aAvgSalary = a.workers.reduce((a, b) => a + b.salary) / a.workers.length;
+            return bAvgSalary - aAvgSalary;
+         });
+      let bestRestaurant = sortedRestaurants[0];
+      let sortedWorkers = bestRestaurant.workers.sort((a, b) => b.salary - a.salary);
+      let averageSalary = (bestRestaurant.workers.reduce((acc, el) => acc + el.salary, 0) / bestRestaurant.workers.length).toFixed(2);
+
+      let bestSalary = sortedWorkers[0].salary.toFixed(2);
+      let topRestaurantString = `Name: ${bestRestaurant.restaurantName} Average Salary: ${averageSalary} Best Salary: ${bestSalary}`
+      let workersString = sortedWorkers.map(x => x = `Name: ${x.name} With Salary: ${x.salary} `)
+         .join(' ');
+      let bestRestaurantElement = document.querySelector('#bestRestaurant p');
+      let workersElement = document.querySelector('#workers p')
+      bestRestaurantElement.textContent = topRestaurantString;
+      workersElement.textContent = workersString;
+   }
+}
