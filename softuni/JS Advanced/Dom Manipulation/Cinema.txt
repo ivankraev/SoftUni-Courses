@@ -45,7 +45,6 @@ function solve() {
             let moviesUl = document.querySelector('#movies ul');
             moviesUl.appendChild(li);
 
-
         }
 
     }
