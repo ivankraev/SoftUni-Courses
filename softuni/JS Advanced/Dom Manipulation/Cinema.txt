@@ -2,7 +2,7 @@ function solve() {
     // getting elements
     let buttons = Array.from(document.querySelectorAll('body button'));
     let [onScreenBtn, clearBtn] = buttons;
-
+    clearBtn.addEventListener('click', clearAll);
     onScreenBtn.addEventListener('click', addNewList);
     function addNewList(e) {
         e.preventDefault();
@@ -45,6 +45,10 @@ function solve() {
             let moviesUl = document.querySelector('#movies ul');
             moviesUl.appendChild(li);
 
+            nameInput.value = '';
+            hallInput.value = '';
+            priceInput.value = '';
+
         }
 
     }
@@ -63,11 +67,21 @@ function solve() {
             let deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             movieLi.appendChild(deleteButton);
+            deleteButton.addEventListener('click', deleteButtonFunc);
             let archiveUl = document.querySelector('#archive ul');
             archiveUl.appendChild(movieLi);
 
         }
- 
-    }
 
+    }
+    function deleteButtonFunc(e) {
+        let curr = e.target;
+        let liToRemove = curr.parentElement;
+        liToRemove.remove();
+    }
+    function clearAll() {
+
+        let toDelete = Array.from(document.querySelectorAll('#archive ul li'));
+        toDelete.forEach(el => el.remove());
+    }
 }
