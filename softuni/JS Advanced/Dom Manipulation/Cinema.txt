@@ -68,6 +68,7 @@ function solve() {
             archiveUl.appendChild(movieLi);
 
         }
+ 
 
     }
 
