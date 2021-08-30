@@ -1,0 +1,74 @@
+function solve() {
+    // getting elements
+    let buttons = Array.from(document.querySelectorAll('body button'));
+    let [onScreenBtn, clearBtn] = buttons;
+
+    onScreenBtn.addEventListener('click', addNewList);
+    function addNewList(e) {
+        e.preventDefault();
+        let movieInputs = document.querySelectorAll('#container input');
+        let [nameInput, hallInput, priceInput] = movieInputs;
+        let name = nameInput.value;
+        let hall = hallInput.value;
+        let price = Number(priceInput.value).toFixed(2);
+
+        if (name.trim() !== '' &&
+            hall.trim() !== '' &&
+            price.trim() !== '' &&
+            !isNaN(price)) {
+
+            let li = document.createElement('li');
+            let nameSpan = document.createElement('span');
+            nameSpan.textContent = name;
+
+            let hallStrong = document.createElement('strong');
+            hallStrong.textContent = `Hall: ${hall}`;
+
+            let rightSectionDiv = document.createElement('div');
+            let priceStrong = document.createElement('strong');
+            priceStrong.textContent = price;
+
+            let ticketsSoldInput = document.createElement('input');
+            ticketsSoldInput.setAttribute('placeholder', 'Tickets Sold');
+
+            let archiveButton = document.createElement('button');
+            archiveButton.textContent = 'Archive';
+            archiveButton.addEventListener('click', archiveMovie);
+
+            rightSectionDiv.appendChild(priceStrong);
+            rightSectionDiv.appendChild(ticketsSoldInput);
+            rightSectionDiv.appendChild(archiveButton);
+
+            li.appendChild(nameSpan);
+            li.appendChild(hallStrong);
+            li.appendChild(rightSectionDiv);
+            let moviesUl = document.querySelector('#movies ul');
+            moviesUl.appendChild(li);
+
+
+        }
+
+    }
+    function archiveMovie(e) {
+        let movieLi = e.target.parentElement.parentElement;
+        let ticketsSoldInput = movieLi.querySelector('div input');
+        let ticketsSold = ticketsSoldInput.value
+        if (ticketsSold.trim() !== '' && !isNaN(Number(ticketsSold))) {
+            ticketsSold = Number(ticketsSold);
+            let priceStrong = movieLi.querySelector('div strong');
+            let price = Number(priceStrong.textContent);
+            let rightDiv = movieLi.querySelector('div');
+            let hallStrong = movieLi.querySelector('strong');
+            hallStrong.textContent = `Total amount: ${(price * ticketsSold).toFixed(2)}`;
+            rightDiv.remove();
+            let deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            movieLi.appendChild(deleteButton);
+            let archiveUl = document.querySelector('#archive ul');
+            archiveUl.appendChild(movieLi);
+
+        }
+
+    }
+
+}
