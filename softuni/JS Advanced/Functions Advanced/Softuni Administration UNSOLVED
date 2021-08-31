@@ -1,0 +1,12 @@
+function solve() {
+    let buttonElement = document.querySelector('.admin-view .action button');
+    buttonElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        let lectureNameInput = document.querySelector('input[name="lecture-name"]');
+        let lectureDateInput = document.querySelector('input[name="lecture-date"]');
+        let lectureModuleInput = document.querySelector('select[name="lecture-module"]');
+        if (lectureNameInput.value && lectureDateInput.value && lectureModuleInput.value !== 'Select module') {
+            
+        }   
+    });
+}
