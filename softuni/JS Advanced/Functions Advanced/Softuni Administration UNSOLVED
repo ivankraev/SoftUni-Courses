@@ -6,7 +6,9 @@ function solve() {
         let lectureDateInput = document.querySelector('input[name="lecture-date"]');
         let lectureModuleInput = document.querySelector('select[name="lecture-module"]');
         if (lectureNameInput.value && lectureDateInput.value && lectureModuleInput.value !== 'Select module') {
-            
+               
+               
+               
         }   
     });
 }
