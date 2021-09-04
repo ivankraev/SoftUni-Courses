@@ -26,4 +26,5 @@ function solve(ticketsArr, sortingCriteria) {
     tickets.sort((a, b) => a.compareTo(b, sortingCriteria));
 
     return tickets;
+
 }
