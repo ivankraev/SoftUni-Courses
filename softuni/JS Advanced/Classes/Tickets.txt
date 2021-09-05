@@ -13,7 +13,6 @@ function solve(ticketsArr, sortingCriteria) {
                 return this[criteria] - other[criteria];
             }
         }
-
     }
     let tickets = [];
     for (let index = 0; index < ticketsArr.length; index++) {
