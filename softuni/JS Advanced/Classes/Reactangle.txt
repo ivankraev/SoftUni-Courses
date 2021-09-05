@@ -7,4 +7,5 @@ class Reactangle {
     calcArea() {
         return this.width * this.height;
     }
+
 }
