@@ -1,0 +1,57 @@
+function solution() {
+
+    const [listOfGiftsSection, sentGiftsSection, discartedGiftsSection] = document.querySelectorAll('section ul');
+    const input = document.querySelector('input');
+    document.querySelector('button').addEventListener('click', addGift);
+
+
+    function addGift() {
+        let giftName = input.value;
+        input.value = '';
+        if (giftName !== '') {
+            let li = e('li', giftName, 'gift');
+            let sendButton = e('button', 'Send', 'sendButton');
+            sendButton.addEventListener('click', sendGiftFunc);
+            let discardButton = e('button', 'Discard', 'discardButton')
+            discardButton.addEventListener('click', discard);
+            li.appendChild(sendButton);
+            li.appendChild(discardButton);
+            listOfGiftsSection.appendChild(li);
+            sortGifts();
+        }
+
+    }
+
+
+    function sendGiftFunc(e) {
+        let currentLi = e.currentTarget.parentElement;
+        let buttons = Array.from(e.currentTarget.parentElement.querySelectorAll('button'));
+        buttons.forEach(el => el.remove());
+        sentGiftsSection.appendChild(currentLi);
+    }
+    function discard(e) {
+        let currentLi = e.currentTarget.parentElement;
+        let buttons = Array.from(e.currentTarget.parentElement.querySelectorAll('button'));
+        buttons.forEach(el => el.remove());
+        discartedGiftsSection.appendChild(currentLi);
+    }
+
+
+
+    function sortGifts() {
+        Array
+            .from(listOfGiftsSection.children)
+            .sort((a, b) => a.textContent.localeCompare(b.textContent))
+            .forEach(el => listOfGiftsSection.appendChild(el));
+
+    }
+
+    function e(type, content, className) {
+        const result = document.createElement(type);
+        result.textContent = content;
+        if (className) {
+            result.className = className
+        }
+        return result;
+    }
+}
