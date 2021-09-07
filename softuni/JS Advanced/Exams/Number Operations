@@ -1,0 +1,28 @@
+describe("numberOperations", function () {
+    describe("powNumber", function () {
+        it("Should return the power of a given number", function () {
+            expect(numberOperations.powNumber(5)).to.equal(25);
+        });
+    });
+    describe("numberChecker", function () {
+        it("Should check if the passed argument is lower than 100", function () {
+            expect(numberOperations.numberChecker(15)).to.equal('The number is lower than 100!');
+        });
+        it("Should check if the passed argument is equal to 100", function () {
+            expect(numberOperations.numberChecker(100)).to.equal('The number is greater or equal to 100!');
+
+        });
+        it("Should check if the passed argument a number", function () {
+            expect(() => numberOperations.numberChecker('kur')).to.throw('The input is not a number!');
+            expect(() => numberOperations.numberChecker(undefined)).to.throw('The input is not a number!');
+        });
+    });
+    describe("sumArrays", function () {
+        it("Should return the power of a given number", function () {
+            let arr1 = [2, 4, 8];
+            let arr2 = [5, 15, 22, 35, 40];
+            expect(numberOperations.sumArrays(arr1, arr2)).to.deep.equal([7, 19, 30, 35, 40]);
+        });
+    });
+
+});
