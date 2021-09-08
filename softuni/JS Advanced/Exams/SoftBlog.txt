@@ -1,0 +1,70 @@
+function solve() {
+   document.querySelector('button').addEventListener('click', createFunc);
+   let author = document.getElementById('creator');
+   let title = document.getElementById('title');
+   let category = document.getElementById('category');
+   let content = document.getElementById('content');
+
+   function createFunc(e) {
+
+      e.preventDefault();
+      let parent = document.querySelector('main section');
+      let titleInput = eFunc('h1', title.value);
+      let categoryInput = eFunc('p', 'Category:');
+      let categoryStrong = eFunc('strong', category.value);
+      categoryInput.appendChild(categoryStrong);
+      let authorInput = eFunc('p', 'Creator:');
+      let authorStrong = eFunc('strong', author.value);
+      authorInput.appendChild(authorStrong);
+      let contentInput = eFunc('p', content.value);
+      let divToAppend = eFunc('div', false, 'buttons');
+      let deleteButton = eFunc('button', 'Delete', 'btn delete');
+      let archiveButton = eFunc('button', 'Archive', 'btn archive');
+      deleteButton.addEventListener('click', (e) => {
+         e.currentTarget.parentElement.parentElement.remove();
+      })
+      divToAppend.appendChild(deleteButton);
+      divToAppend.appendChild(archiveButton);
+      let article = eFunc('article');
+      article.appendChild(titleInput);
+      article.appendChild(categoryInput);
+      article.appendChild(authorInput);
+      article.appendChild(contentInput);
+      article.appendChild(divToAppend);
+      let store = title.value;
+      archiveButton.addEventListener('click', () => { archiveFunc(article, store) });
+      parent.appendChild(article);
+
+      author.value = '';
+      title.value = '';
+      category.value = '';
+      content.value = '';
+   };
+   function archiveFunc(articleToArchive, titleToMove) {
+      let li = eFunc('li', titleToMove);
+      articleToArchive.remove();
+      document.querySelector('.archive-section ol').appendChild(li);
+      sortFunc();
+
+   }
+   function sortFunc() {
+      Array.from(document.querySelectorAll('.archive-section ol li'))
+         .sort((a, b) => a.textContent.localeCompare(b.textContent))
+         .forEach(element => {
+            document.querySelector('.archive-section ol').appendChild(element);
+         });
+
+   }
+
+   function eFunc(type, content, classname) {
+      let result = document.createElement(type);
+      if (classname) {
+         result.className = classname;
+      }
+      if (content) {
+         result.textContent = content;
+      }
+
+      return result;
+   }
+}
