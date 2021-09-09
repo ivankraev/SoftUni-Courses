@@ -7,7 +7,6 @@ describe("cinema", function () {
         it("Should return passed array joined by ,", function () {
             expect(cinema.showMovies(['Titanic', 'Something', 'Cat'])).to.equal('Titanic, Something, Cat');
         });
-
     });
     describe("ticketPrice", function () {
         it("Should check what is the ticket price", function () {
