@@ -1,0 +1,38 @@
+describe("cinema", function () {
+    describe("showMovies", function () {
+        it("Should return string when array is empty", function () {
+            let arr = [];
+            expect(cinema.showMovies(arr)).to.equal('There are currently no movies to show.');
+        });
+        it("Should return passed array joined by ,", function () {
+            expect(cinema.showMovies(['Titanic', 'Something', 'Cat'])).to.equal('Titanic, Something, Cat');
+        });
+    });
+    describe("ticketPrice", function () {
+        it("Should check what is the ticket price", function () {
+            expect(cinema.ticketPrice('Premiere')).to.equal(12.00);
+            expect(cinema.ticketPrice('Normal')).to.equal(7.50);
+            expect(cinema.ticketPrice('Discount')).to.equal(5.50);
+        });
+        it("Should throw error when ticket type is not supported", function () {
+            expect(() => cinema.ticketPrice("Petko")).to.throw('Invalid projection type.');
+        });
+
+    });
+    describe("swapSeatsInHall", function () {
+        it("Should return string when arguments are invalid.", function () {
+            expect(cinema.swapSeatsInHall(2.2, 12)).to.equal("Unsuccessful change of seats in the hall.");
+            expect(cinema.swapSeatsInHall(0, 2)).to.equal("Unsuccessful change of seats in the hall.");
+            expect(cinema.swapSeatsInHall(2, 0)).to.equal("Unsuccessful change of seats in the hall.");
+            expect(cinema.swapSeatsInHall(12, -5)).to.equal("Unsuccessful change of seats in the hall.");
+            expect(cinema.swapSeatsInHall(2, 100)).to.equal("Unsuccessful change of seats in the hall.");
+            expect(cinema.swapSeatsInHall(2, 2)).to.equal("Unsuccessful change of seats in the hall.");
+            expect(cinema.swapSeatsInHall(2)).to.equal("Unsuccessful change of seats in the hall.");
+        });
+        it("Should return string when args are valid", function () {
+            expect(cinema.swapSeatsInHall(2, 5)).to.equal("Successful change of seats in the hall.");
+            expect(cinema.swapSeatsInHall(2, 20)).to.equal("Successful change of seats in the hall.");
+        });
+
+    });
+});
