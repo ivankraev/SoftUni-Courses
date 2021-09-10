@@ -8,7 +8,6 @@ describe("cinema", function () {
             expect(cinema.showMovies(['Titanic', 'Something', 'Cat'])).to.equal('Titanic, Something, Cat');
         });
     });
-
     describe("ticketPrice", function () {
         it("Should check what is the ticket price", function () {
             expect(cinema.ticketPrice('Premiere')).to.equal(12.00);
