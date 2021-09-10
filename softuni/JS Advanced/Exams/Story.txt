@@ -6,6 +6,7 @@ class Story {
         this._likes = [];
     }
 
+
     get likes() {
         return this._likes.length == 0 ? `${this.title} has 0 likes`
             : this._likes.length == 1 ? `${this._likes[0]} likes this story!`
