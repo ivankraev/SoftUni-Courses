@@ -11,6 +11,8 @@ describe("numberOperations", function () {
         it("Should check if the passed argument is equal to 100", function () {
             expect(numberOperations.numberChecker(100)).to.equal('The number is greater or equal to 100!');
 
+
+
         });
         it("Should check if the passed argument a number", function () {
             expect(() => numberOperations.numberChecker('kur')).to.throw('The input is not a number!');
