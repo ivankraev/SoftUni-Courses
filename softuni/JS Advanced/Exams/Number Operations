@@ -4,6 +4,7 @@ describe("numberOperations", function () {
             expect(numberOperations.powNumber(5)).to.equal(25);
         });
     });
+    
     describe("numberChecker", function () {
         it("Should check if the passed argument is lower than 100", function () {
             expect(numberOperations.numberChecker(15)).to.equal('The number is lower than 100!');
@@ -17,6 +18,7 @@ describe("numberOperations", function () {
             expect(() => numberOperations.numberChecker(undefined)).to.throw('The input is not a number!');
         });
     });
+    
     describe("sumArrays", function () {
         it("Should return the power of a given number", function () {
             let arr1 = [2, 4, 8];
