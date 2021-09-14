@@ -5,6 +5,7 @@ function solve() {
    let category = document.getElementById('category');
    let content = document.getElementById('content');
 
+
    function createFunc(e) {
       e.preventDefault();
       let parent = document.querySelector('main section');
