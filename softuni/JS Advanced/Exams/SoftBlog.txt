@@ -22,7 +22,6 @@ function solve() {
       let archiveButton = eFunc('button', 'Archive', 'btn archive');
       deleteButton.addEventListener('click', (e) => {
          e.currentTarget.parentElement.parentElement.remove();
-         
       })
       divToAppend.appendChild(deleteButton);
       divToAppend.appendChild(archiveButton);
