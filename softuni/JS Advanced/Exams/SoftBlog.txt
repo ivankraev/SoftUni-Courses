@@ -6,7 +6,6 @@ function solve() {
    let content = document.getElementById('content');
 
    function createFunc(e) {
-
       e.preventDefault();
       let parent = document.querySelector('main section');
       let titleInput = eFunc('h1', title.value);
