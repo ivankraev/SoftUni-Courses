@@ -1,0 +1,51 @@
+class Restaurant {
+    constructor(budgetMoney) {
+        this.budgetMoney = budgetMoney;
+        this.menu = {};
+        this.stockProducts = {};
+        this.history = [];
+    }
+ 
+    loadProducts(arr) {
+        arr.forEach(x => {
+            const [productName, productQuantity, totalPrice] = x.split(' ');
+            if (totalPrice <= this.budgetMoney ) {
+                const findProduct = this.stockProducts[productName];
+                findProduct ? this.stockProducts[productName] += +productQuantity : this.stockProducts[productName] = +productQuantity;
+                this.history.push(`Successfully loaded ${productQuantity} ${productName}`);
+                this.budgetMoney -= (totalPrice);
+            } else {
+                this.history.push(`There was not enough money to load ${productQuantity} ${productName}`);
+            }
+        });
+        return this.history.join('\n');
+    }
+ 
+    addToMenu(meal, products, price) {
+        const findMeal = this.menu[meal];
+        if (findMeal) {
+            return `The ${meal} is already in the our menu, try something different.`;
+        }
+        this.menu[meal] = { products, price };
+        const count = Object.keys(this.menu).length;
+        return `Great idea! Now with the ${meal} we have ${count== 1 ? `${count} meal` : `${count} meals`} in the menu, other ideas?`;
+    }
+ 
+    showTheMenu() {
+        return Object.keys(this.menu).length == 0 ? 'Our menu is not ready yet, please come later...' : Object.entries(this.menu).map(([k, v]) => `${k} - $ ${v.price}`).join('\n');
+    }
+ 
+    makeTheOrder(meal) {
+        const findMeal = this.menu[meal];
+        if (!findMeal) {
+            return `There is not ${meal} yet in our menu, do you want to order something else?`;
+        }
+        const orderIsPossible = findMeal.products.filter(x => this.stockProducts[x.split(' ')[0]] && this.stockProducts[x.split(' ')[0]] > x.split(' ')[1]).length;
+        if (orderIsPossible) {
+            findMeal.products.map(x => this.stockProducts[x.split(' ')[0]] -= Number(x.split(' ')[1]));
+            this.budgetMoney += Number(findMeal.price);
+            return `Your order (${meal}) will be completed in the next 30 minutes and will cost you ${findMeal.price}.`;
+        } 
+            return `For the time being, we cannot complete your order (${meal}), we are very sorry...`;
+    }
+}
