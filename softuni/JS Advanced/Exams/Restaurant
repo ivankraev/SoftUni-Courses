@@ -6,6 +6,7 @@ class Restaurant {
         this.history = [];
     }
  
+ 
     loadProducts(arr) {
         arr.forEach(x => {
             const [productName, productQuantity, totalPrice] = x.split(' ');
