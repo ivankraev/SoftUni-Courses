@@ -1,3 +1,5 @@
+import authService from "../services/authService.js";
+
 export async function jsonRequest(url, method, body, isAuthorized, skipResult) {
     if (method === undefined) {
         method = 'Get'
@@ -7,7 +9,7 @@ export async function jsonRequest(url, method, body, isAuthorized, skipResult) {
         headers['Content-Type'] = 'application/json';
     }
     if (isAuthorized) {
-        headers['X-Authorization'] = localStorage.getItem('auth_token')
+        headers['X-Authorization'] = authService.getAuthToken();
     }
     let options = {
         headers,
