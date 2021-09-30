@@ -20,7 +20,7 @@ async function update(item, id) {
     let result = await jsonRequest(`${baseUrl}/${id}`, "Put", item, true);
     return result;
 }
-async function deleteItem(item, id) {
+async function deleteItem(id) {
     let result = await jsonRequest(`${baseUrl}/${id}`, "Delete", undefined, true);
     return result;
 }
