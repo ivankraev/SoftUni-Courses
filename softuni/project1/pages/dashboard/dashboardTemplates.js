@@ -1,6 +1,24 @@
 import { html } from "./../../node_modules/lit-html/lit-html.js"
 
 
+export let furnitureTemplate = (furniture) => html `
+            <div class="col-md-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <img src=${furniture.img}/>
+                        <p>Description here</p>
+                        <footer>
+                            <p>Price: <span>${furniture.price}</span></p>
+                        </footer>
+                        <div>
+                            <a href="/details/${furniture._id}" class="btn btn-info">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+`;
+
 export let dashboardTemplate = (allFurniture) => html `
         <div class="row space-top">
             <div class="col-md-12">
@@ -9,47 +27,6 @@ export let dashboardTemplate = (allFurniture) => html `
             </div>
         </div>
         <div class="row space-top">
-            <div class="col-md-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <img src="./01.Furniture/images/table.png" />
-                        <p>Description here</p>
-                        <footer>
-                            <p>Price: <span>235 $</span></p>
-                        </footer>
-                        <div>
-                            <a href="#" class="btn btn-info">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <img src="./01.Furniture/images/sofa.jpg" />
-                        <p>Description here</p>
-                        <footer>
-                            <p>Price: <span>1200 $</span></p>
-                        </footer>
-                        <div>
-                            <a href="#" class="btn btn-info">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <img src="./01.Furniture/images/chair.jpg" />
-                        <p>Description here</p>
-                        <footer>
-                            <p>Price: <span>55 $</span></p>
-                        </footer>
-                        <div>
-                            <a href="#" class="btn btn-info">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            ${allFurniture.map(f=>furnitureTemplate(f))}
         </div>
-`
+`;
