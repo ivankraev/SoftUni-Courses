@@ -1,0 +1,55 @@
+function solution() {
+
+  let fullName = document.getElementById('fname');
+  let email = document.getElementById('email');
+  let phoneNumber = document.getElementById('phone');
+  let address = document.getElementById('address');
+  let postalCode = document.getElementById('code');
+  let submitButton = document.getElementById('submitBTN');
+  let inputArr = [fullName, email, phoneNumber, address, postalCode];
+  submitButton.addEventListener('click', submitFunc);
+  function submitFunc(e) {
+    if (fullName.value !== '' && email.value !== '') {
+      e.preventDefault();
+      let parentEl = document.getElementById('infoPreview');
+      let fullNameLi = eFunc('li', `Full Name: ${fullName.value}`);
+      let emailLi = eFunc('li', `Email: ${email.value}`);
+      let phoneLi = eFunc('li', `Phone Number: ${phoneNumber.value}`);
+      let addressLi = eFunc('li', `Address: ${address.value}`);
+      let postalCodeLi = eFunc('li', `Postal Code: ${postalCode.value}`);
+      let lis = [fullNameLi, emailLi, phoneLi, addressLi, postalCodeLi];
+      lis.forEach(el => parentEl.appendChild(el));
+      submitButton.setAttribute('disabled', true);
+      document.getElementById('editBTN').disabled = false;
+      document.getElementById('continueBTN').disabled = false;
+      let backUpArr = inputArr.slice(0).map(el => el = el.value);
+      document.getElementById('editBTN').addEventListener('click', () => editFunc(backUpArr));
+      document.getElementById('continueBTN').addEventListener('click', continueFunc);
+      inputArr.forEach(el => el.value = '');
+    }
+  }
+
+  function eFunc(type, value) {
+    let result = document.createElement(type);
+    result.textContent = value;
+    return result;
+  }
+  function editFunc(values) {
+    inputArr.forEach((el, i) => values.forEach((ell, ii) => {
+      if (i == ii) {
+        el.value = ell;
+      }
+    }));
+    submitButton.disabled = false;
+    document.getElementById('editBTN').disabled = true;
+    document.getElementById('continueBTN').disabled = true;
+    document.getElementById('infoPreview').innerHTML = '';
+  }
+  function continueFunc() {
+    document.getElementById('block').innerHTML = '';
+    let header = document.createElement('h3');
+    header.textContent = "Thank you for your reservation!";
+    document.getElementById('block').appendChild(header);
+  }
+
+}
