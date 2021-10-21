@@ -1,0 +1,33 @@
+describe("testNumbers", function () {
+    describe("sumNumber", function () {
+        it("Should check if parameters are numbers", function () {
+            expect(testNumbers.sumNumbers('neshto', 'neshto')).to.equal(undefined);
+        });
+        it("Should return sum of the two parameters", function () {
+            expect(testNumbers.sumNumbers(-1, 4)).to.equal('3.00');
+
+        });
+    });
+    describe("numberChecker", function () {
+        it("Should check if parameter is numbers", function () {
+            expect(() => testNumbers.numberChecker('neshto')).to.throw('The input is not a number!');
+        });
+        it("Should check if the number is even or odd", function () {
+            expect(testNumbers.numberChecker(4)).to.equal('The number is even!');
+
+        });
+        it("Should check if the number is even or odd", function () {
+            expect(testNumbers.numberChecker(3)).to.equal('The number is odd!');
+
+        });
+    });
+    describe("averageSumArray", function () {
+
+        it("Should return the sum", function () {
+            expect(testNumbers.averageSumArray([1,3,5])).to.equal(3);
+
+        });
+    });
+
+
+});
